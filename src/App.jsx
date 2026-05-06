@@ -16,7 +16,7 @@ function CodeBlock({ children }) {
       </div>
       <div style={styles.preScroll}>
         <pre style={styles.pre}>
-          <code dangerouslySetInnerHTML={{ __html: children }} />
+          <code style={styles.code} dangerouslySetInnerHTML={{ __html: children }} />
         </pre>
       </div>
     </div>
@@ -855,9 +855,16 @@ const styles = {
   },
   dot: { width: 10, height: 10, borderRadius: "50%", display: "inline-block" },
   preScroll: {
-    overflowX: "auto",
     width: "100%",
     boxSizing: "border-box",
+    overflow: "hidden",
+  },
+  code: {
+    display: "block",
+    whiteSpace: "pre-wrap",
+    wordBreak: "break-word",
+    overflowWrap: "break-word",
+    textAlign: "left",
   },
   pre: {
     background: "transparent",
@@ -867,9 +874,11 @@ const styles = {
     lineHeight: 1.7,
     margin: 0,
     color: "#cbd5e1",
-    whiteSpace: "pre",
-    display: "inline-block",
-    minWidth: "100%",
+    whiteSpace: "pre-wrap",
+    wordBreak: "break-word",
+    overflowWrap: "break-word",
+    display: "block",
+    width: "100%",
     boxSizing: "border-box",
   },
 
