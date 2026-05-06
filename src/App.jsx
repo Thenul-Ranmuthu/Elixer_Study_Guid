@@ -1,143 +1,25 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
-// import './App.css'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <section id="center">
-//         <div className="hero">
-//           <img src={heroImg} className="base" width="170" height="179" alt="" />
-//           <img src={reactLogo} className="framework" alt="React logo" />
-//           <img src={viteLogo} className="vite" alt="Vite logo" />
-//         </div>
-//         <div>
-//           <h1>Get started</h1>
-//           <p>
-//             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-//           </p>
-//         </div>
-//         <button
-//           type="button"
-//           className="counter"
-//           onClick={() => setCount((count) => count + 1)}
-//         >
-//           Count is {count}
-//         </button>
-//       </section>
-
-//       <div className="ticks"></div>
-
-//       <section id="next-steps">
-//         <div id="docs">
-//           <svg className="icon" role="presentation" aria-hidden="true">
-//             <use href="/icons.svg#documentation-icon"></use>
-//           </svg>
-//           <h2>Documentation</h2>
-//           <p>Your questions, answered</p>
-//           <ul>
-//             <li>
-//               <a href="https://vite.dev/" target="_blank">
-//                 <img className="logo" src={viteLogo} alt="" />
-//                 Explore Vite
-//               </a>
-//             </li>
-//             <li>
-//               <a href="https://react.dev/" target="_blank">
-//                 <img className="button-icon" src={reactLogo} alt="" />
-//                 Learn more
-//               </a>
-//             </li>
-//           </ul>
-//         </div>
-//         <div id="social">
-//           <svg className="icon" role="presentation" aria-hidden="true">
-//             <use href="/icons.svg#social-icon"></use>
-//           </svg>
-//           <h2>Connect with us</h2>
-//           <p>Join the Vite community</p>
-//           <ul>
-//             <li>
-//               <a href="https://github.com/vitejs/vite" target="_blank">
-//                 <svg
-//                   className="button-icon"
-//                   role="presentation"
-//                   aria-hidden="true"
-//                 >
-//                   <use href="/icons.svg#github-icon"></use>
-//                 </svg>
-//                 GitHub
-//               </a>
-//             </li>
-//             <li>
-//               <a href="https://chat.vite.dev/" target="_blank">
-//                 <svg
-//                   className="button-icon"
-//                   role="presentation"
-//                   aria-hidden="true"
-//                 >
-//                   <use href="/icons.svg#discord-icon"></use>
-//                 </svg>
-//                 Discord
-//               </a>
-//             </li>
-//             <li>
-//               <a href="https://x.com/vite_js" target="_blank">
-//                 <svg
-//                   className="button-icon"
-//                   role="presentation"
-//                   aria-hidden="true"
-//                 >
-//                   <use href="/icons.svg#x-icon"></use>
-//                 </svg>
-//                 X.com
-//               </a>
-//             </li>
-//             <li>
-//               <a href="https://bsky.app/profile/vite.dev" target="_blank">
-//                 <svg
-//                   className="button-icon"
-//                   role="presentation"
-//                   aria-hidden="true"
-//                 >
-//                   <use href="/icons.svg#bluesky-icon"></use>
-//                 </svg>
-//                 Bluesky
-//               </a>
-//             </li>
-//           </ul>
-//         </div>
-//       </section>
-
-//       <div className="ticks"></div>
-//       <section id="spacer"></section>
-//     </>
-//   )
-// }
-
-// export default App
-
-
-
-
-
 import { useState } from "react";
 
 /* ─────────────────────────────────────────────
    Elixir & Functional Programming Study Guide
-   Converted from HTML to deployable React JSX
+   Enhanced UI — dark academic / terminal aesthetic
    ───────────────────────────────────────────── */
 
 // ── Syntax-highlighted code block ──────────────
 function CodeBlock({ children }) {
   return (
-    <pre style={styles.pre}>
-      <code dangerouslySetInnerHTML={{ __html: children }} />
-    </pre>
+    <div style={styles.preWrapper}>
+      <div style={styles.preDots}>
+        <span style={{ ...styles.dot, background: "#ff5f57" }} />
+        <span style={{ ...styles.dot, background: "#febc2e" }} />
+        <span style={{ ...styles.dot, background: "#28c840" }} />
+      </div>
+      <div style={styles.preScroll}>
+        <pre style={styles.pre}>
+          <code dangerouslySetInnerHTML={{ __html: children }} />
+        </pre>
+      </div>
+    </div>
   );
 }
 
@@ -146,23 +28,33 @@ function Highlight({ children }) {
   return <div style={styles.highlight}>{children}</div>;
 }
 
-// ── Concept card (label / value / sub) ─────────
-function ConceptCard({ label, value, sub }) {
+// ── Concept card ───────────────────────────────
+function ConceptCard({ label, value, sub, accent }) {
+  const accents = {
+    purple: { border: "#a855f7", glow: "rgba(168,85,247,0.15)", badge: "#a855f7" },
+    teal: { border: "#14b8a6", glow: "rgba(20,184,166,0.15)", badge: "#14b8a6" },
+    amber: { border: "#f59e0b", glow: "rgba(245,158,11,0.15)", badge: "#f59e0b" },
+    rose: { border: "#f43f5e", glow: "rgba(244,63,94,0.15)", badge: "#f43f5e" },
+    blue: { border: "#3b82f6", glow: "rgba(59,130,246,0.15)", badge: "#3b82f6" },
+  };
+  const a = accents[accent] || accents.purple;
   return (
-    <div style={styles.conceptCard}>
-      <div style={styles.conceptLabel}>{label}</div>
+    <div style={{ ...styles.conceptCard, borderTop: `3px solid ${a.border}`, boxShadow: `0 4px 20px ${a.glow}` }}>
+      <div style={{ ...styles.conceptLabel, color: a.badge }}>{label}</div>
       <div style={styles.conceptVal}>{value}</div>
       {sub && <div style={styles.conceptSub}>{sub}</div>}
     </div>
   );
 }
 
-// ── Compare card (good / bad) ───────────────────
+// ── Compare card ───────────────────────────────
 function CompareCard({ variant, title, children }) {
   const isGood = variant === "good";
   return (
     <div style={{ ...styles.compareCard, ...(isGood ? styles.compareGood : styles.compareBad) }}>
-      <div style={{ ...styles.compareTitle, color: isGood ? "#10b981" : "#ef4444" }}>{title}</div>
+      <div style={{ ...styles.compareTitle, color: isGood ? "#34d399" : "#fb7185" }}>
+        <span style={{ marginRight: 6 }}>{isGood ? "✓" : "✗"}</span>{title}
+      </div>
       {children}
     </div>
   );
@@ -171,10 +63,10 @@ function CompareCard({ variant, title, children }) {
 // ── Badge ───────────────────────────────────────
 function Badge({ variant, children }) {
   const colors = {
-    info:    { background: "#eff6ff", color: "#2563eb" },
-    success: { background: "#f0fdf4", color: "#16a34a" },
-    warn:    { background: "#fffbeb", color: "#d97706" },
-    danger:  { background: "#fef2f2", color: "#dc2626" },
+    info: { background: "rgba(59,130,246,0.15)", color: "#60a5fa", border: "1px solid rgba(59,130,246,0.3)" },
+    success: { background: "rgba(52,211,153,0.15)", color: "#34d399", border: "1px solid rgba(52,211,153,0.3)" },
+    warn: { background: "rgba(251,191,36,0.15)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.3)" },
+    danger: { background: "rgba(251,113,133,0.15)", color: "#fb7185", border: "1px solid rgba(251,113,133,0.3)" },
   };
   return <span style={{ ...styles.badge, ...colors[variant] }}>{children}</span>;
 }
@@ -186,7 +78,7 @@ function Badge({ variant, children }) {
 function OverviewSection() {
   return (
     <div>
-      <h2 style={styles.h2}>What this lecture is about</h2>
+      <SectionHeader icon="⚗️" title="What this lecture is about" />
       <p style={styles.p}>
         This is Lecture 4 on Functional Programming (Programming Languages unit, Arlen Brower / David
         McMeekin). Together with the "Thinking in Functions" supplement and Kalpani's additional notes,
@@ -194,39 +86,39 @@ function OverviewSection() {
       </p>
 
       <div style={styles.cardGrid}>
-        <ConceptCard label="Language"  value="Elixir"       sub="Runs on BEAM (Erlang VM)"      />
-        <ConceptCard label="Paradigm"  value="Functional"   sub="No classes, no mutable state"  />
-        <ConceptCard label="Style"     value="Declarative"  sub="Describe what, not how"        />
-        <ConceptCard label="Strengths" value="Concurrency"  sub="Fault-tolerant, scalable"      />
+        <ConceptCard accent="purple" label="Language" value="Elixir" sub="Runs on BEAM (Erlang VM)" />
+        <ConceptCard accent="teal" label="Paradigm" value="Functional" sub="No classes, no mutable state" />
+        <ConceptCard accent="amber" label="Style" value="Declarative" sub="Describe what, not how" />
+        <ConceptCard accent="rose" label="Strengths" value="Concurrency" sub="Fault-tolerant, scalable" />
       </div>
 
-      <h3 style={styles.h3}>The functional family tree (from your slides)</h3>
+      <SubHeader>The functional family tree</SubHeader>
       <div style={styles.card}>
         {[
-          { indent: 0, bg: "#f3f4f6", color: "#374151", id: "L",  name: "LISP",        desc: "John McCarthy, 1958. First functional language. Needed recursion + linked lists for AI." },
-          { indent: 2, bg: "#eff6ff", color: "#2563eb", id: "S",  name: "Scheme",      desc: "MIT, mid-1970s. Statically scoped, functions as first-class entities." },
-          { indent: 2, bg: "#eff6ff", color: "#2563eb", id: "CL", name: "Common Lisp", desc: "Combined many Lisp dialects to solve portability issues." },
-          { indent: 2, bg: "#fffbeb", color: "#d97706", id: "Er", name: "Erlang",      desc: "Ericsson, telecom. Scalable, fault-tolerant. Verbose syntax." },
-          { indent: 4, bg: "#f0fdf4", color: "#16a34a", id: "Ex", name: "Elixir",      desc: "Modern syntax on BEAM VM. Powers WhatsApp, RabbitMQ. \"A little nicer.\"" },
+          { indent: 0, color: "#94a3b8", bg: "rgba(148,163,184,0.12)", id: "L", name: "LISP", desc: "John McCarthy, 1958. First functional language. Needed recursion + linked lists for AI." },
+          { indent: 2, color: "#60a5fa", bg: "rgba(96,165,250,0.12)", id: "S", name: "Scheme", desc: "MIT, mid-1970s. Statically scoped, functions as first-class entities." },
+          { indent: 2, color: "#60a5fa", bg: "rgba(96,165,250,0.12)", id: "CL", name: "Common Lisp", desc: "Combined many Lisp dialects to solve portability issues." },
+          { indent: 2, color: "#fbbf24", bg: "rgba(251,191,36,0.12)", id: "Er", name: "Erlang", desc: "Ericsson, telecom. Scalable, fault-tolerant. Verbose syntax." },
+          { indent: 4, color: "#a855f7", bg: "rgba(168,85,247,0.12)", id: "Ex", name: "Elixir", desc: "Modern syntax on BEAM VM. Powers WhatsApp, RabbitMQ. \"A little nicer.\"" },
         ].map((row) => (
-          <div key={row.id} style={{ display: "flex", alignItems: "center", gap: 10, paddingLeft: `${row.indent * 0.5}rem`, marginBottom: 8 }}>
-            <div style={{ ...styles.treeIcon, background: row.bg, color: row.color }}>{row.id}</div>
+          <div key={row.id} style={{ display: "flex", alignItems: "center", gap: 12, paddingLeft: `${row.indent * 0.6}rem`, marginBottom: 10 }}>
+            <div style={{ ...styles.treeIcon, background: row.bg, color: row.color, border: `1px solid ${row.color}40` }}>{row.id}</div>
             <div style={{ fontSize: 13 }}>
-              <strong>{row.name}</strong>{" "}
-              <span style={{ color: "#6b7280" }}>— {row.desc}</span>
+              <strong style={{ color: "#e2e8f0" }}>{row.name}</strong>{" "}
+              <span style={{ color: "#94a3b8" }}>— {row.desc}</span>
             </div>
           </div>
         ))}
       </div>
 
-      <h3 style={styles.h3}>The 3 key requirements (McCarthy's original insight)</h3>
+      <SubHeader>The 3 key requirements</SubHeader>
       <p style={styles.p}>To process symbolic data in linked lists, you need:</p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: "0.75rem" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: "0.75rem" }}>
         <Badge variant="info">1. Recursion</Badge>
         <Badge variant="success">2. Conditional expressions</Badge>
         <Badge variant="warn">3. Dynamic allocation of linked lists</Badge>
       </div>
-      <p style={{ ...styles.p, fontSize: 13 }}>
+      <p style={{ ...styles.p, fontSize: 13, color: "#94a3b8" }}>
         Elixir satisfies all three natively. These aren't optional extras — they are the engine of the language.
       </p>
     </div>
@@ -236,55 +128,55 @@ function OverviewSection() {
 function FPConceptsSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Functional programming concepts</h2>
+      <SectionHeader icon="🧮" title="Functional programming concepts" />
 
-      <h3 style={styles.h3}>The paradigm shift: von Neumann vs. Mathematical evaluation</h3>
+      <SubHeader>The paradigm shift: von Neumann vs. Mathematical evaluation</SubHeader>
       <div style={styles.compareGrid}>
         <CompareCard variant="bad" title="Imperative (von Neumann)">
-          <CodeBlock>{`<span style="color:#ef4444">static int x = 1;\nx = x * 2;  // overwrites memory\nreturn x;   // side-effect!</span>`}</CodeBlock>
-          <p style={{ fontSize: 12, marginTop: 6, color: "#ef4444" }}>Programs and data in memory. Iteration efficient. But state causes bugs.</p>
+          <CodeBlock>{`<span style="color:#fb7185">static int x = 1;\nx = x * 2;  // overwrites memory\nreturn x;   // side-effect!</span>`}</CodeBlock>
+          <p style={{ fontSize: 12, marginTop: 6, color: "#fb7185" }}>Programs and data in memory. Iteration efficient. But state causes bugs.</p>
         </CompareCard>
         <CompareCard variant="good" title="Functional (Mathematical)">
-          <CodeBlock>{`<span style="color:#10b981">f(x) = x³\nx = 2 → f(2) = 8\n# No memory overwrite</span>`}</CodeBlock>
-          <p style={{ fontSize: 12, marginTop: 6, color: "#10b981" }}>Parameters mapped to values directly. No state. Pure evaluation.</p>
+          <CodeBlock>{`<span style="color:#34d399">f(x) = x³\nx = 2 → f(2) = 8\n# No memory overwrite</span>`}</CodeBlock>
+          <p style={{ fontSize: 12, marginTop: 6, color: "#34d399" }}>Parameters mapped to values directly. No state. Pure evaluation.</p>
         </CompareCard>
       </div>
 
-      <h3 style={styles.h3}>Pure functions</h3>
+      <SubHeader>Pure functions</SubHeader>
       <Highlight>Same input → same output. Always. No side effects. This makes code modular, highly concurrent, and trivial to test.</Highlight>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># Pure: output depends only on input</span>
-<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">Math</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">square</span>(x), <span style="color:#a855f7">do</span>: x * x
-<span style="color:#a855f7">end</span>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># Pure: output depends only on input</span>
+<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">Math</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">square</span>(x), <span style="color:#c084fc">do</span>: x * x
+<span style="color:#c084fc">end</span>
 
-<span style="color:#6b7280;font-style:italic"># Impure: reads/modifies external state — AVOID in FP</span>
-<span style="color:#6b7280;font-style:italic"># static int counter = 0; counter++;</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># Impure: reads/modifies external state — AVOID in FP</span>
+<span style="color:#64748b;font-style:italic"># static int counter = 0; counter++;</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Immutability: transformation, not mutation</h3>
+      <SubHeader>Immutability: transformation, not mutation</SubHeader>
       <p style={styles.p}>In Elixir, data never changes. Functions take in data and return brand new, transformed data. This eliminates race conditions in concurrent systems.</p>
       <div style={styles.compareGrid}>
         <CompareCard variant="bad" title="Imperative (mutates)">
-          <CodeBlock>{`<span style="color:#ef4444">[1,2,3] → [1,9,3]\n# Same variable overwritten</span>`}</CodeBlock>
+          <CodeBlock>{`<span style="color:#fb7185">[1,2,3] → [1,9,3]\n# Same variable overwritten</span>`}</CodeBlock>
         </CompareCard>
         <CompareCard variant="good" title="Functional (transforms)">
-          <CodeBlock>{`<span style="color:#10b981">[1,2,3] → function → [1,9,3]  (new)\n[1,2,3]  ← original untouched</span>`}</CodeBlock>
+          <CodeBlock>{`<span style="color:#34d399">[1,2,3] → function → [1,9,3]  (new)\n[1,2,3]  ← original untouched</span>`}</CodeBlock>
         </CompareCard>
       </div>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># put_elem returns a NEW tuple — aTuple unchanged</span>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># put_elem returns a NEW tuple — aTuple unchanged</span>
 aTuple = {1, 2, 3}
 newTuple = put_elem(aTuple, 1, 10)
-<span style="color:#6b7280;font-style:italic"># aTuple is still {1, 2, 3}</span>
-<span style="color:#6b7280;font-style:italic"># newTuple is {1, 10, 3}</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># aTuple is still {1, 2, 3}</span>
+<span style="color:#64748b;font-style:italic"># newTuple is {1, 10, 3}</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Avoiding side effects</h3>
+      <SubHeader>Avoiding side effects</SubHeader>
       <p style={styles.p}>FP tries to avoid side effects — anything that modifies state outside a function. The hidden cost of state: NULL pointer dereferences, buffer overflows, dangling pointers, stack overflows. Immutability eliminates all of these.</p>
 
-      <h3 style={styles.h3}>The four pillars (your blueprint cheat sheet)</h3>
+      <SubHeader>The four pillars</SubHeader>
       <div style={styles.cardGrid}>
-        <ConceptCard label="Rule"      value="Pure functions"   sub="Yields predictability & modularity"       />
-        <ConceptCard label="Data"      value="Immutability"     sub="Yields safe concurrency"                  />
-        <ConceptCard label="Structure" value="Linked lists"     sub="Yields natural recursive processing"      />
-        <ConceptCard label="Engine"    value="Tail recursion"   sub="Yields infinite iteration without overflow" />
+        <ConceptCard accent="purple" label="Rule" value="Pure functions" sub="Yields predictability & modularity" />
+        <ConceptCard accent="teal" label="Data" value="Immutability" sub="Yields safe concurrency" />
+        <ConceptCard accent="amber" label="Structure" value="Linked lists" sub="Yields natural recursive processing" />
+        <ConceptCard accent="blue" label="Engine" value="Tail recursion" sub="Yields infinite iteration without overflow" />
       </div>
     </div>
   );
@@ -293,58 +185,58 @@ newTuple = put_elem(aTuple, 1, 10)
 function ElixirBasicsSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Elixir basics</h2>
+      <SectionHeader icon="💜" title="Elixir basics" />
 
-      <h3 style={styles.h3}>What Elixir is</h3>
+      <SubHeader>What Elixir is</SubHeader>
       <p style={styles.p}>Elixir is a functional, concurrent, fault-tolerant language running on the BEAM (Erlang Virtual Machine). It brings modern, cleaner syntax to Erlang's battle-tested infrastructure. Functions are the main building blocks — not classes or objects.</p>
 
-      <h3 style={styles.h3}>Modules and functions</h3>
-      <CodeBlock>{`<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">Greeting</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">hello</span>(name) <span style="color:#a855f7">do</span>
-    <span style="color:#10b981">"Hello, \#{name}!"</span>
-  <span style="color:#a855f7">end</span>
-<span style="color:#a855f7">end</span>
+      <SubHeader>Modules and functions</SubHeader>
+      <CodeBlock>{`<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">Greeting</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">hello</span>(name) <span style="color:#c084fc">do</span>
+    <span style="color:#34d399">"Hello, \#{name}!"</span>
+  <span style="color:#c084fc">end</span>
+<span style="color:#c084fc">end</span>
 
-<span style="color:#6b7280;font-style:italic"># Short form (single expression)</span>
-<span style="color:#a855f7">def</span> <span style="color:#3b82f6">hello</span>(name), <span style="color:#a855f7">do</span>: <span style="color:#10b981">"Hello, \#{name}!"</span>
+<span style="color:#64748b;font-style:italic"># Short form (single expression)</span>
+<span style="color:#c084fc">def</span> <span style="color:#60a5fa">hello</span>(name), <span style="color:#c084fc">do</span>: <span style="color:#34d399">"Hello, \#{name}!"</span>
 
-<span style="color:#6b7280;font-style:italic"># Private function (only callable within module)</span>
-<span style="color:#a855f7">defp</span> <span style="color:#3b82f6">secret</span>(x), <span style="color:#a855f7">do</span>: x * 2`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># Private function (only callable within module)</span>
+<span style="color:#c084fc">defp</span> <span style="color:#60a5fa">secret</span>(x), <span style="color:#c084fc">do</span>: x * 2`}</CodeBlock>
 
-      <h3 style={styles.h3}>Variables</h3>
+      <SubHeader>Variables</SubHeader>
       <p style={styles.p}>Variables in Elixir are <em>bound</em>, not assigned in the imperative sense. They cannot be mutated — rebinding creates a new binding.</p>
       <CodeBlock>{`x = 10
-y = x + 5   <span style="color:#6b7280;font-style:italic"># y = 15, x still = 10</span>
-x = 20      <span style="color:#6b7280;font-style:italic"># rebinding x — the old 10 is gone from this scope</span>`}</CodeBlock>
+y = x + 5   <span style="color:#64748b;font-style:italic"># y = 15, x still = 10</span>
+x = 20      <span style="color:#64748b;font-style:italic"># rebinding x — the old 10 is gone from this scope</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>IO — printing output</h3>
+      <SubHeader>IO — printing output</SubHeader>
       <Highlight>
-        <strong>IO.puts</strong> — prints strings only (converts integers but NOT lists)<br />
-        <strong>IO.inspect</strong> — prints any data structure, great for debugging
+        <strong style={{ color: "#c084fc" }}>IO.puts</strong> — prints strings only (converts integers but NOT lists)<br />
+        <strong style={{ color: "#c084fc" }}>IO.inspect</strong> — prints any data structure, great for debugging
       </Highlight>
-      <CodeBlock>{`IO.puts(<span style="color:#10b981">"hello"</span>)       <span style="color:#6b7280;font-style:italic"># OK</span>
-IO.puts(123)          <span style="color:#6b7280;font-style:italic"># OK (converted to "123")</span>
-IO.puts([1, 2, 3])    <span style="color:#6b7280;font-style:italic"># ERROR — lists are special in Elixir!</span>
-IO.inspect([1, 2, 3]) <span style="color:#6b7280;font-style:italic"># OK — use this for lists</span>`}</CodeBlock>
+      <CodeBlock>{`IO.puts(<span style="color:#34d399">"hello"</span>)       <span style="color:#64748b;font-style:italic"># OK</span>
+IO.puts(123)          <span style="color:#64748b;font-style:italic"># OK (converted to "123")</span>
+IO.puts([1, 2, 3])    <span style="color:#64748b;font-style:italic"># ERROR — lists are special in Elixir!</span>
+IO.inspect([1, 2, 3]) <span style="color:#64748b;font-style:italic"># OK — use this for lists</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Erlang vs Elixir — same BEAM, better syntax</h3>
+      <SubHeader>Erlang vs Elixir — same BEAM, better syntax</SubHeader>
       <p style={styles.p}>Your slides show a GenServer (server process) in both. The Erlang version requires ~20 lines with verbose attribute syntax. The Elixir version:</p>
-      <CodeBlock>{`<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">SumServer</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">use</span> GenServer
+      <CodeBlock>{`<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">SumServer</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">use</span> GenServer
 
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">start</span> <span style="color:#a855f7">do</span>
-    GenServer.start(__MODULE__, <span style="color:#f59e0b">nil</span>)
-  <span style="color:#a855f7">end</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">start</span> <span style="color:#c084fc">do</span>
+    GenServer.start(__MODULE__, <span style="color:#fbbf24">nil</span>)
+  <span style="color:#c084fc">end</span>
 
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">sum</span>(server, a, b) <span style="color:#a855f7">do</span>
-    GenServer.call(server, {<span style="color:#f59e0b">:sum</span>, a, b})
-  <span style="color:#a855f7">end</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">sum</span>(server, a, b) <span style="color:#c084fc">do</span>
+    GenServer.call(server, {<span style="color:#fbbf24">:sum</span>, a, b})
+  <span style="color:#c084fc">end</span>
 
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">handle_call</span>({<span style="color:#f59e0b">:sum</span>, a, b}, _from, state) <span style="color:#a855f7">do</span>
-    {<span style="color:#f59e0b">:reply</span>, a + b, state}
-  <span style="color:#a855f7">end</span>
-<span style="color:#a855f7">end</span>`}</CodeBlock>
-      <p style={{ fontSize: 13, color: "#6b7280" }}>This is the same GenServer behaviour — just much cleaner. Elixir is a little nicer.</p>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">handle_call</span>({<span style="color:#fbbf24">:sum</span>, a, b}, _from, state) <span style="color:#c084fc">do</span>
+    {<span style="color:#fbbf24">:reply</span>, a + b, state}
+  <span style="color:#c084fc">end</span>
+<span style="color:#c084fc">end</span>`}</CodeBlock>
+      <p style={{ fontSize: 13, color: "#94a3b8" }}>This is the same GenServer behaviour — just much cleaner. Elixir is a little nicer.</p>
     </div>
   );
 }
@@ -352,68 +244,68 @@ IO.inspect([1, 2, 3]) <span style="color:#6b7280;font-style:italic"># OK — use
 function DataTypesSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Elixir data types</h2>
+      <SectionHeader icon="🔷" title="Elixir data types" />
 
-      <h3 style={styles.h3}>Atoms</h3>
+      <SubHeader>Atoms</SubHeader>
       <p style={styles.p}>Atoms are labels for unique, immutable values. They evaluate to themselves and are fundamentally different from variables. Used as tags, status codes, and keys.</p>
-      <CodeBlock>{`<span style="color:#f59e0b">:ok</span>
-<span style="color:#f59e0b">:error</span>
-<span style="color:#f59e0b">:sum</span>
-<span style="color:#f59e0b">true</span>   <span style="color:#6b7280;font-style:italic"># true and false are atoms</span>
-<span style="color:#f59e0b">nil</span>    <span style="color:#6b7280;font-style:italic"># nil is also an atom</span>`}</CodeBlock>
-      <Highlight>Atoms start with a colon. They are like named constants that mean exactly what they say. Tuples often use an atom as a first element to signal a type, e.g. <code>{"{:ok, value}"}</code> or <code>{"{:error, reason}"}</code>.</Highlight>
+      <CodeBlock>{`<span style="color:#fbbf24">:ok</span>
+<span style="color:#fbbf24">:error</span>
+<span style="color:#fbbf24">:sum</span>
+<span style="color:#fbbf24">true</span>   <span style="color:#64748b;font-style:italic"># true and false are atoms</span>
+<span style="color:#fbbf24">nil</span>    <span style="color:#64748b;font-style:italic"># nil is also an atom</span>`}</CodeBlock>
+      <Highlight>Atoms start with a colon. They are like named constants that mean exactly what they say. Tuples often use an atom as a first element to signal a type, e.g. <code style={{ color: "#c084fc" }}>{"{:ok, value}"}</code> or <code style={{ color: "#c084fc" }}>{"{:error, reason}"}</code>.</Highlight>
 
-      <h3 style={styles.h3}>Tuples</h3>
-      <p style={styles.p}>An ordered, fixed-size collection of values written using <code>{"{}"}</code>. Can hold any data type. Immutable — once created, cannot be modified. Pattern matching works powerfully on tuples.</p>
+      <SubHeader>Tuples</SubHeader>
+      <p style={styles.p}>An ordered, fixed-size collection of values written using <code style={styles.inlineCode}>{"{}"}</code>. Can hold any data type. Immutable — once created, cannot be modified. Pattern matching works powerfully on tuples.</p>
       <CodeBlock>{`iex> {1, 2, 3}
 {1, 2, 3}
 
 iex> a = {1, 2, 3}
 
-<span style="color:#6b7280;font-style:italic"># Pattern matching — destructure a tuple into variables</span>
+<span style="color:#64748b;font-style:italic"># Pattern matching — destructure a tuple into variables</span>
 iex> {x, y, z} = {1, 2, 3}
-iex> x   <span style="color:#6b7280;font-style:italic"># 1</span>
-iex> y   <span style="color:#6b7280;font-style:italic"># 2</span>
+iex> x   <span style="color:#64748b;font-style:italic"># 1</span>
+iex> y   <span style="color:#64748b;font-style:italic"># 2</span>
 
-<span style="color:#6b7280;font-style:italic"># Literals in patterns must match exactly</span>
+<span style="color:#64748b;font-style:italic"># Literals in patterns must match exactly</span>
 iex> {1, y, z} = {10, 2, 3}
-<span style="color:#6b7280;font-style:italic"># ** (MatchError) — 1 != 10</span>
+<span style="color:#64748b;font-style:italic"># ** (MatchError) — 1 != 10</span>
 
-<span style="color:#6b7280;font-style:italic"># put_elem returns a brand new tuple</span>
-new_tuple = put_elem(a, 1, 10)   <span style="color:#6b7280;font-style:italic"># {1, 10, 3}</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># put_elem returns a brand new tuple</span>
+new_tuple = put_elem(a, 1, 10)   <span style="color:#64748b;font-style:italic"># {1, 10, 3}</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Pattern matching — the key feature</h3>
-      <Highlight>The <code>=</code> sign in Elixir is a <strong>match operator</strong>, not assignment. It tries to make the left side match the right side. Variables on the left get bound to values on the right.</Highlight>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># Tuple pattern match</span>
-{a, b, c} = {1, 2, 3}   <span style="color:#6b7280;font-style:italic"># a=1, b=2, c=3</span>
+      <SubHeader>Pattern matching — the key feature</SubHeader>
+      <Highlight>The <code style={{ color: "#c084fc" }}>=</code> sign in Elixir is a <strong>match operator</strong>, not assignment. It tries to make the left side match the right side. Variables on the left get bound to values on the right.</Highlight>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># Tuple pattern match</span>
+{a, b, c} = {1, 2, 3}   <span style="color:#64748b;font-style:italic"># a=1, b=2, c=3</span>
 
-<span style="color:#6b7280;font-style:italic"># List pattern match</span>
-[head | tail] = [1, 2, 3]   <span style="color:#6b7280;font-style:italic"># head=1, tail=[2,3]</span>
+<span style="color:#64748b;font-style:italic"># List pattern match</span>
+[head | tail] = [1, 2, 3]   <span style="color:#64748b;font-style:italic"># head=1, tail=[2,3]</span>
 
-<span style="color:#6b7280;font-style:italic"># _ is a wildcard — "I don't care about this value"</span>
-[a | _] = [1, 2, 3]   <span style="color:#6b7280;font-style:italic"># a=1, ignore the rest</span>
-<span style="color:#6b7280;font-style:italic"># Note: _ cannot be used in expressions — only in patterns</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># _ is a wildcard — "I don't care about this value"</span>
+[a | _] = [1, 2, 3]   <span style="color:#64748b;font-style:italic"># a=1, ignore the rest</span>
+<span style="color:#64748b;font-style:italic"># Note: _ cannot be used in expressions — only in patterns</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Lists</h3>
-      <p style={styles.p}>An ordered, linked collection of elements written with square brackets <code>[]</code>. Immutable. Can hold mixed types. Structured as recursive <code>[head | tail]</code>.</p>
+      <SubHeader>Lists</SubHeader>
+      <p style={styles.p}>An ordered, linked collection of elements written with square brackets <code style={styles.inlineCode}>[]</code>. Immutable. Can hold mixed types. Structured as recursive <code style={styles.inlineCode}>[head | tail]</code>.</p>
       <CodeBlock>{`x = [1, 2, 3]
-hd(x)   <span style="color:#6b7280;font-style:italic"># 1  — the head (first element)</span>
-tl(x)   <span style="color:#6b7280;font-style:italic"># [2, 3]  — the tail (rest of list)</span>
+hd(x)   <span style="color:#64748b;font-style:italic"># 1  — the head (first element)</span>
+tl(x)   <span style="color:#64748b;font-style:italic"># [2, 3]  — the tail (rest of list)</span>
 
-<span style="color:#6b7280;font-style:italic"># Construct a new list</span>
-[1 | [2, 3]]   <span style="color:#6b7280;font-style:italic"># [1, 2, 3]</span>
+<span style="color:#64748b;font-style:italic"># Construct a new list</span>
+[1 | [2, 3]]   <span style="color:#64748b;font-style:italic"># [1, 2, 3]</span>
 
-<span style="color:#6b7280;font-style:italic"># Concatenate lists</span>
-[1, 2] ++ [3, 4]   <span style="color:#6b7280;font-style:italic"># [1, 2, 3, 4]</span>
+<span style="color:#64748b;font-style:italic"># Concatenate lists</span>
+[1, 2] ++ [3, 4]   <span style="color:#64748b;font-style:italic"># [1, 2, 3, 4]</span>
 
-<span style="color:#6b7280;font-style:italic"># Lists can contain anything — even nested lists</span>
-[1, 2, [<span style="color:#10b981">'b'</span>, <span style="color:#10b981">'c'</span>], 3, 4]`}</CodeBlock>
-      <Highlight>In Lisp/Scheme: <code>car</code> = head, <code>cdr</code> = tail, <code>cons</code> = construct a list. In Elixir: <code>hd()</code>, <code>tl()</code>, <code>{"[h | t]"}</code>. Same idea, nicer syntax.</Highlight>
+<span style="color:#64748b;font-style:italic"># Lists can contain anything — even nested lists</span>
+[1, 2, [<span style="color:#34d399">'b'</span>, <span style="color:#34d399">'c'</span>], 3, 4]`}</CodeBlock>
+      <Highlight>In Lisp/Scheme: <code style={{ color: "#c084fc" }}>car</code> = head, <code style={{ color: "#c084fc" }}>cdr</code> = tail, <code style={{ color: "#c084fc" }}>cons</code> = construct a list. In Elixir: <code style={{ color: "#c084fc" }}>hd()</code>, <code style={{ color: "#c084fc" }}>tl()</code>, <code style={{ color: "#c084fc" }}>{"[h | t]"}</code>. Same idea, nicer syntax.</Highlight>
 
-      <h3 style={styles.h3}>Lists as recursive structures</h3>
-      <p style={styles.p}>Lists can be thought of as: a head value + a tail (which is also a list). An empty tail <code>[]</code> signals the end. This structure is what makes recursion on lists natural.</p>
+      <SubHeader>Lists as recursive structures</SubHeader>
+      <p style={styles.p}>Lists can be thought of as: a head value + a tail (which is also a list). An empty tail <code style={styles.inlineCode}>[]</code> signals the end. This structure is what makes recursion on lists natural.</p>
       <CodeBlock>{`my_list = [head | tail]
-<span style="color:#6b7280;font-style:italic"># [1, 2, 3] is really [1 | [2 | [3 | []]]]</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># [1, 2, 3] is really [1 | [2 | [3 | []]]]</span>`}</CodeBlock>
     </div>
   );
 }
@@ -421,60 +313,60 @@ tl(x)   <span style="color:#6b7280;font-style:italic"># [2, 3]  — the tail (re
 function FunctionsSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Functions in Elixir</h2>
+      <SectionHeader icon="λ" title="Functions in Elixir" />
 
-      <h3 style={styles.h3}>Named functions with pattern matching</h3>
+      <SubHeader>Named functions with pattern matching</SubHeader>
       <p style={styles.p}>Elixir uses pattern matching on function arguments to select which clause to execute. This replaces if/else chains and is the idiomatic way to write conditional logic.</p>
-      <CodeBlock>{`<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">Math</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">factorial</span>(0), <span style="color:#a855f7">do</span>: 1           <span style="color:#6b7280;font-style:italic"># base case</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">factorial</span>(n), <span style="color:#a855f7">do</span>: n * factorial(n - 1)
-<span style="color:#a855f7">end</span>
+      <CodeBlock>{`<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">Math</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">factorial</span>(0), <span style="color:#c084fc">do</span>: 1           <span style="color:#64748b;font-style:italic"># base case</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">factorial</span>(n), <span style="color:#c084fc">do</span>: n * factorial(n - 1)
+<span style="color:#c084fc">end</span>
 
-IO.puts(Math.factorial(5))   <span style="color:#6b7280;font-style:italic"># 120</span>
+IO.puts(Math.factorial(5))   <span style="color:#64748b;font-style:italic"># 120</span>
 
-<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">My</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">sum</span>([]), <span style="color:#a855f7">do</span>: 0
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">sum</span>([head | tail]), <span style="color:#a855f7">do</span>: head + sum(tail)
-<span style="color:#a855f7">end</span>
+<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">My</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">sum</span>([]), <span style="color:#c084fc">do</span>: 0
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">sum</span>([head | tail]), <span style="color:#c084fc">do</span>: head + sum(tail)
+<span style="color:#c084fc">end</span>
 
-IO.puts(My.sum([1, 2, 3, 4, 5, 6, 7]))   <span style="color:#6b7280;font-style:italic"># 28</span>`}</CodeBlock>
+IO.puts(My.sum([1, 2, 3, 4, 5, 6, 7]))   <span style="color:#64748b;font-style:italic"># 28</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Lambda functions (anonymous functions)</h3>
-      <p style={styles.p}>Lambda expressions are nameless functions. In Elixir they are defined with <code>fn ... end</code>. You call them with a dot: <code>func.(args)</code>. This dot is unique to anonymous functions — a deliberate design choice.</p>
-      <CodeBlock>{`add = <span style="color:#a855f7">fn</span> a, b -> a + b <span style="color:#a855f7">end</span>
-IO.puts(add.(3, 4))   <span style="color:#6b7280;font-style:italic"># 7</span>
+      <SubHeader>Lambda functions (anonymous functions)</SubHeader>
+      <p style={styles.p}>Lambda expressions are nameless functions. In Elixir they are defined with <code style={styles.inlineCode}>fn ... end</code>. You call them with a dot: <code style={styles.inlineCode}>func.(args)</code>. This dot is unique to anonymous functions — a deliberate design choice.</p>
+      <CodeBlock>{`add = <span style="color:#c084fc">fn</span> a, b -> a + b <span style="color:#c084fc">end</span>
+IO.puts(add.(3, 4))   <span style="color:#64748b;font-style:italic"># 7</span>
 
-<span style="color:#6b7280;font-style:italic"># Functions are first-class — pass as arguments</span>
-double = <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>
-Enum.map([1, 2, 3], double)   <span style="color:#6b7280;font-style:italic"># [2, 4, 6]</span>`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># Functions are first-class — pass as arguments</span>
+double = <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>
+Enum.map([1, 2, 3], double)   <span style="color:#64748b;font-style:italic"># [2, 4, 6]</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Closures — the "backpack" metaphor</h3>
+      <SubHeader>Closures — the "backpack" metaphor</SubHeader>
       <p style={styles.p}>A closure is a lambda that also captures (locks in) the variables from its surrounding scope at the moment it was defined. Even if those variables change later, the closure keeps its original snapshot.</p>
       <Highlight>Think of it as a backpack: when the function is born, it packs in the current value of the variables it uses. It carries this backpack forever, ignoring any later changes to those variables.</Highlight>
       <CodeBlock>{`x = 100
-f = <span style="color:#a855f7">fn</span> -> IO.puts(x) <span style="color:#a855f7">end</span>
-f.()      <span style="color:#6b7280;font-style:italic"># 100 — captured x=100 at definition</span>
+f = <span style="color:#c084fc">fn</span> -> IO.puts(x) <span style="color:#c084fc">end</span>
+f.()      <span style="color:#64748b;font-style:italic"># 100 — captured x=100 at definition</span>
 x = 500
-f.()      <span style="color:#6b7280;font-style:italic"># 100 — STILL 100! The closure ignores the new x</span>
+f.()      <span style="color:#64748b;font-style:italic"># 100 — STILL 100! The closure ignores the new x</span>
 
-f1 = <span style="color:#a855f7">fn</span> -> IO.puts(x) <span style="color:#a855f7">end</span>   <span style="color:#6b7280;font-style:italic"># new closure captures x=500</span>
-f1.()     <span style="color:#6b7280;font-style:italic"># 500</span>
+f1 = <span style="color:#c084fc">fn</span> -> IO.puts(x) <span style="color:#c084fc">end</span>   <span style="color:#64748b;font-style:italic"># new closure captures x=500</span>
+f1.()     <span style="color:#64748b;font-style:italic"># 500</span>
 
 x = 300
-f2 = <span style="color:#a855f7">fn</span> a -> IO.puts(a * x) <span style="color:#a855f7">end</span>   <span style="color:#6b7280;font-style:italic"># x=300 captured</span>
-f2.(3)    <span style="color:#6b7280;font-style:italic"># 900  (not 1500, because x was 300 when f2 was defined)</span>`}</CodeBlock>
-      <p style={{ fontSize: 13, color: "#6b7280" }}>Lambda vs closure: all closures are lambdas, but not all lambdas are closures. A lambda is just a nameless function. A closure additionally includes lexical (static) scoping of its surrounding variables.</p>
+f2 = <span style="color:#c084fc">fn</span> a -> IO.puts(a * x) <span style="color:#c084fc">end</span>   <span style="color:#64748b;font-style:italic"># x=300 captured</span>
+f2.(3)    <span style="color:#64748b;font-style:italic"># 900  (not 1500, because x was 300 when f2 was defined)</span>`}</CodeBlock>
+      <p style={{ fontSize: 13, color: "#94a3b8" }}>Lambda vs closure: all closures are lambdas, but not all lambdas are closures. A lambda is just a nameless function. A closure additionally includes lexical (static) scoping of its surrounding variables.</p>
 
-      <h3 style={styles.h3}>Private functions with <code>defp</code></h3>
-      <CodeBlock>{`<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">MyList</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">reverse</span>(list), <span style="color:#a855f7">do</span>: do_reverse(list, [])
+      <SubHeader>Private functions with <code style={styles.inlineCode}>defp</code></SubHeader>
+      <CodeBlock>{`<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">MyList</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">reverse</span>(list), <span style="color:#c084fc">do</span>: do_reverse(list, [])
 
-  <span style="color:#a855f7">defp</span> <span style="color:#3b82f6">do_reverse</span>([], acc), <span style="color:#a855f7">do</span>: acc            <span style="color:#6b7280;font-style:italic"># private helper</span>
-  <span style="color:#a855f7">defp</span> <span style="color:#3b82f6">do_reverse</span>([head | tail], acc),
-    <span style="color:#a855f7">do</span>: do_reverse(tail, [head | acc])
-<span style="color:#a855f7">end</span>
+  <span style="color:#c084fc">defp</span> <span style="color:#60a5fa">do_reverse</span>([], acc), <span style="color:#c084fc">do</span>: acc            <span style="color:#64748b;font-style:italic"># private helper</span>
+  <span style="color:#c084fc">defp</span> <span style="color:#60a5fa">do_reverse</span>([head | tail], acc),
+    <span style="color:#c084fc">do</span>: do_reverse(tail, [head | acc])
+<span style="color:#c084fc">end</span>
 
-IO.inspect(MyList.reverse([1, 2, 3, 4]))   <span style="color:#6b7280;font-style:italic"># [4, 3, 2, 1]</span>`}</CodeBlock>
+IO.inspect(MyList.reverse([1, 2, 3, 4]))   <span style="color:#64748b;font-style:italic"># [4, 3, 2, 1]</span>`}</CodeBlock>
     </div>
   );
 }
@@ -482,31 +374,31 @@ IO.inspect(MyList.reverse([1, 2, 3, 4]))   <span style="color:#6b7280;font-style
 function RecursionSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Recursion & tail recursion</h2>
+      <SectionHeader icon="🔄" title="Recursion & tail recursion" />
 
-      <h3 style={styles.h3}>Why recursion instead of loops?</h3>
-      <p style={styles.p}>In imperative languages you write <code>{"for(i=0; i<10; i++)"}</code> — but this mutates <code>i</code>, which is a side effect. In Elixir, there are no traditional loops. Instead, we must use recursion to iterate. This is not a limitation — it's a deliberate design that enforces immutability.</p>
+      <SubHeader>Why recursion instead of loops?</SubHeader>
+      <p style={styles.p}>In imperative languages you write <code style={styles.inlineCode}>{"for(i=0; i<10; i++)"}</code> — but this mutates <code style={styles.inlineCode}>i</code>, which is a side effect. In Elixir, there are no traditional loops. Instead, we must use recursion to iterate. This is not a limitation — it's a deliberate design that enforces immutability.</p>
 
-      <h3 style={styles.h3}>Standard recursion — and its problem</h3>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic">// JavaScript equivalent — not tail recursive</span>
+      <SubHeader>Standard recursion — and its problem</SubHeader>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic">// JavaScript equivalent — not tail recursive</span>
 function factorial(n) {
   if (n === 0) { return 1; }
-  return n * factorial(n - 1);  <span style="color:#6b7280;font-style:italic">// multiplication AFTER recursive call</span>
+  return n * factorial(n - 1);  <span style="color:#64748b;font-style:italic">// multiplication AFTER recursive call</span>
 }`}</CodeBlock>
       <Highlight>Every recursive call creates a new stack frame because the compiler must remember the pending multiplication. For large n, this overflows the call stack — a fatal memory fault.</Highlight>
 
-      <h3 style={styles.h3}>Tail recursion — the compiler's trick</h3>
+      <SubHeader>Tail recursion — the compiler's trick</SubHeader>
       <p style={styles.p}>A function is tail recursive if the recursive call is the very last operation — no pending work left to do after it. The BEAM VM can then reuse the same stack frame instead of creating a new one.</p>
       <div style={styles.compareGrid}>
         <CompareCard variant="bad" title="Standard (NOT tail-recursive)">
-          <CodeBlock>{`<span style="color:#ef4444">def factorial(0), do: 1
+          <CodeBlock>{`<span style="color:#fb7185">def factorial(0), do: 1
 def factorial(n),
   do: n * factorial(n-1)
 # n * ... happens AFTER recursion
 # Creates N stack frames</span>`}</CodeBlock>
         </CompareCard>
         <CompareCard variant="good" title="Tail-recursive (with accumulator)">
-          <CodeBlock>{`<span style="color:#10b981">def factorial(n), do: fact(n, 1)
+          <CodeBlock>{`<span style="color:#34d399">def factorial(n), do: fact(n, 1)
 defp fact(0, acc), do: acc
 defp fact(n, acc),
   do: fact(n-1, acc*n)
@@ -515,7 +407,7 @@ defp fact(n, acc),
         </CompareCard>
       </div>
 
-      <h3 style={styles.h3}>How tail recursion works (step by step)</h3>
+      <SubHeader>How tail recursion works (step by step)</SubHeader>
       <div style={styles.card}>
         {[
           "Function called with initial arguments → stack frame created.",
@@ -525,33 +417,36 @@ defp fact(n, acc),
           "Process continues until the base case is reached.",
           "Result returned from the single frame that's been reused throughout.",
         ].map((step, i) => (
-          <p key={i} style={{ fontSize: 13, marginBottom: 4 }}><strong>{i + 1}.</strong> {step}</p>
+          <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
+            <span style={styles.stepNum}>{i + 1}</span>
+            <p style={{ fontSize: 13, margin: 0, color: "#cbd5e1", lineHeight: 1.6 }}>{step}</p>
+          </div>
         ))}
       </div>
 
-      <h3 style={styles.h3}>The accumulator pattern</h3>
-      <p style={styles.p}>To make recursion tail-optimized, carry the running result forward in a variable called an accumulator (<code>acc</code>). Instead of doing work after the recursive call, fold the work into the next call's arguments.</p>
-      <CodeBlock>{`<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">MyList</span> <span style="color:#a855f7">do</span>
-  <span style="color:#6b7280;font-style:italic"># Public API — user doesn't see the acc</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">reverse</span>(list), <span style="color:#a855f7">do</span>: do_reverse(list, [])
+      <SubHeader>The accumulator pattern</SubHeader>
+      <p style={styles.p}>To make recursion tail-optimized, carry the running result forward in a variable called an accumulator (<code style={styles.inlineCode}>acc</code>). Instead of doing work after the recursive call, fold the work into the next call's arguments.</p>
+      <CodeBlock>{`<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">MyList</span> <span style="color:#c084fc">do</span>
+  <span style="color:#64748b;font-style:italic"># Public API — user doesn't see the acc</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">reverse</span>(list), <span style="color:#c084fc">do</span>: do_reverse(list, [])
 
-  <span style="color:#6b7280;font-style:italic"># Private tail-recursive helper with accumulator</span>
-  <span style="color:#a855f7">defp</span> <span style="color:#3b82f6">do_reverse</span>([], acc), <span style="color:#a855f7">do</span>: acc
-  <span style="color:#a855f7">defp</span> <span style="color:#3b82f6">do_reverse</span>([head | tail], acc),
-    <span style="color:#a855f7">do</span>: do_reverse(tail, [head | acc])   <span style="color:#6b7280;font-style:italic"># last op = recursion</span>
-<span style="color:#a855f7">end</span>
+  <span style="color:#64748b;font-style:italic"># Private tail-recursive helper with accumulator</span>
+  <span style="color:#c084fc">defp</span> <span style="color:#60a5fa">do_reverse</span>([], acc), <span style="color:#c084fc">do</span>: acc
+  <span style="color:#c084fc">defp</span> <span style="color:#60a5fa">do_reverse</span>([head | tail], acc),
+    <span style="color:#c084fc">do</span>: do_reverse(tail, [head | acc])   <span style="color:#64748b;font-style:italic"># last op = recursion</span>
+<span style="color:#c084fc">end</span>
 
-IO.inspect(MyList.reverse([<span style="color:#10b981">"ab"</span>, <span style="color:#10b981">"cd"</span>, <span style="color:#10b981">"ef"</span>]))   <span style="color:#6b7280;font-style:italic"># ["ef", "cd", "ab"]</span>`}</CodeBlock>
-      <Highlight>The naive version uses <code>++</code> after the recursive call (not tail-recursive and slow). The accumulator version passes the result forward — tail-recursive and efficient.</Highlight>
+IO.inspect(MyList.reverse([<span style="color:#34d399">"ab"</span>, <span style="color:#34d399">"cd"</span>, <span style="color:#34d399">"ef"</span>]))   <span style="color:#64748b;font-style:italic"># ["ef", "cd", "ab"]</span>`}</CodeBlock>
+      <Highlight>The naive version uses <code style={{ color: "#c084fc" }}>++</code> after the recursive call (not tail-recursive and slow). The accumulator version passes the result forward — tail-recursive and efficient.</Highlight>
 
-      <h3 style={styles.h3}>Sum a list — simple recursion</h3>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># Simple recursion (not tail-recursive)</span>
-<span style="color:#a855f7">defmodule</span> <span style="color:#3b82f6">My</span> <span style="color:#a855f7">do</span>
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">sum</span>([]), <span style="color:#a855f7">do</span>: 0
-  <span style="color:#a855f7">def</span> <span style="color:#3b82f6">sum</span>([head | tail]), <span style="color:#a855f7">do</span>: head + sum(tail)
-<span style="color:#a855f7">end</span>
+      <SubHeader>Sum a list — simple recursion</SubHeader>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># Simple recursion (not tail-recursive)</span>
+<span style="color:#c084fc">defmodule</span> <span style="color:#60a5fa">My</span> <span style="color:#c084fc">do</span>
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">sum</span>([]), <span style="color:#c084fc">do</span>: 0
+  <span style="color:#c084fc">def</span> <span style="color:#60a5fa">sum</span>([head | tail]), <span style="color:#c084fc">do</span>: head + sum(tail)
+<span style="color:#c084fc">end</span>
 
-IO.puts(My.sum([1, 2, 3, 4, 5, 6, 7]))   <span style="color:#6b7280;font-style:italic"># 28</span>`}</CodeBlock>
+IO.puts(My.sum([1, 2, 3, 4, 5, 6, 7]))   <span style="color:#64748b;font-style:italic"># 28</span>`}</CodeBlock>
     </div>
   );
 }
@@ -559,42 +454,42 @@ IO.puts(My.sum([1, 2, 3, 4, 5, 6, 7]))   <span style="color:#6b7280;font-style:i
 function EnumsPipesSection() {
   return (
     <div>
-      <h2 style={styles.h2}>Enums, streams & the pipe operator</h2>
+      <SectionHeader icon="🔗" title="Enums, streams & the pipe operator" />
 
-      <h3 style={styles.h3}>The Enum module</h3>
-      <p style={styles.p}>Lists are enumerables. The <code>Enum</code> module provides higher-order functions to work with them without writing explicit recursion every time. Enums are <strong>eager</strong> — they evaluate immediately.</p>
-      <CodeBlock>{`Enum.sum([1, 2, 3])            <span style="color:#6b7280;font-style:italic"># 6</span>
-Enum.map([1, 2, 3], <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>)    <span style="color:#6b7280;font-style:italic"># [2, 4, 6]</span>
-Enum.filter([1,2,3,4], <span style="color:#a855f7">fn</span> x -> x > 2 <span style="color:#a855f7">end</span>)  <span style="color:#6b7280;font-style:italic"># [3, 4]</span>
-Enum.reduce([1,2,3], 0, <span style="color:#a855f7">fn</span> x, acc -> x + acc <span style="color:#a855f7">end</span>)  <span style="color:#6b7280;font-style:italic"># 6</span>`}</CodeBlock>
+      <SubHeader>The Enum module</SubHeader>
+      <p style={styles.p}>Lists are enumerables. The <code style={styles.inlineCode}>Enum</code> module provides higher-order functions to work with them without writing explicit recursion every time. Enums are <strong>eager</strong> — they evaluate immediately.</p>
+      <CodeBlock>{`Enum.sum([1, 2, 3])            <span style="color:#64748b;font-style:italic"># 6</span>
+Enum.map([1, 2, 3], <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>)    <span style="color:#64748b;font-style:italic"># [2, 4, 6]</span>
+Enum.filter([1,2,3,4], <span style="color:#c084fc">fn</span> x -> x > 2 <span style="color:#c084fc">end</span>)  <span style="color:#64748b;font-style:italic"># [3, 4]</span>
+Enum.reduce([1,2,3], 0, <span style="color:#c084fc">fn</span> x, acc -> x + acc <span style="color:#c084fc">end</span>)  <span style="color:#64748b;font-style:italic"># 6</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Streams — lazy evaluation</h3>
-      <p style={styles.p}><code>Stream</code> is like <code>Enum</code> but lazy — it doesn't process elements until you ask for them. Use for large or infinite sequences where you don't need everything at once.</p>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># Enum: processes all 1_000_000 elements immediately</span>
-Enum.map(1..1_000_000, <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>) |> Enum.take(5)
+      <SubHeader>Streams — lazy evaluation</SubHeader>
+      <p style={styles.p}><code style={styles.inlineCode}>Stream</code> is like <code style={styles.inlineCode}>Enum</code> but lazy — it doesn't process elements until you ask for them. Use for large or infinite sequences where you don't need everything at once.</p>
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># Enum: processes all 1_000_000 elements immediately</span>
+Enum.map(1..1_000_000, <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>) |> Enum.take(5)
 
-<span style="color:#6b7280;font-style:italic"># Stream: only processes 5 elements total — much more efficient</span>
-Stream.map(1..1_000_000, <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>) |> Enum.take(5)`}</CodeBlock>
+<span style="color:#64748b;font-style:italic"># Stream: only processes 5 elements total — much more efficient</span>
+Stream.map(1..1_000_000, <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>) |> Enum.take(5)`}</CodeBlock>
 
-      <h3 style={styles.h3}>The pipe operator <code>|&gt;</code></h3>
+      <SubHeader>The pipe operator <code style={styles.inlineCode}>|&gt;</code></SubHeader>
       <p style={styles.p}>One of Elixir's most loved features. It chains function calls by passing the result of the left side as the first argument to the right side. Makes code read left-to-right like a data pipeline.</p>
       <Highlight>
-        Without pipe: <code>{"Enum.sum(Enum.map([1,2,3], fn x → x*2 end))"}</code><br />
-        With pipe: <code>{"Enum.map([1,2,3], fn x → x*2 end) |> Enum.sum()"}</code>
+        Without pipe: <code style={{ color: "#c084fc" }}>{"Enum.sum(Enum.map([1,2,3], fn x → x*2 end))"}</code><br />
+        With pipe: <code style={{ color: "#34d399" }}>{"Enum.map([1,2,3], fn x → x*2 end) |> Enum.sum()"}</code>
       </Highlight>
-      <CodeBlock>{`<span style="color:#6b7280;font-style:italic"># These are exactly equivalent:</span>
-Enum.sum(Enum.map([1, 2, 3], <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>))
+      <CodeBlock>{`<span style="color:#64748b;font-style:italic"># These are exactly equivalent:</span>
+Enum.sum(Enum.map([1, 2, 3], <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>))
 
-Enum.map([1, 2, 3], <span style="color:#a855f7">fn</span> x -> x * 2 <span style="color:#a855f7">end</span>)
+Enum.map([1, 2, 3], <span style="color:#c084fc">fn</span> x -> x * 2 <span style="color:#c084fc">end</span>)
 |> Enum.sum()
 
-<span style="color:#6b7280;font-style:italic"># Longer pipelines read like a recipe:</span>
+<span style="color:#64748b;font-style:italic"># Longer pipelines read like a recipe:</span>
 [1, 2, 3, 4, 5]
-|> Enum.filter(<span style="color:#a855f7">fn</span> x -> rem(x, 2) == 0 <span style="color:#a855f7">end</span>)  <span style="color:#6b7280;font-style:italic"># keep evens</span>
-|> Enum.map(<span style="color:#a855f7">fn</span> x -> x * x <span style="color:#a855f7">end</span>)             <span style="color:#6b7280;font-style:italic"># square them</span>
-|> Enum.sum()                               <span style="color:#6b7280;font-style:italic"># add up</span>`}</CodeBlock>
+|> Enum.filter(<span style="color:#c084fc">fn</span> x -> rem(x, 2) == 0 <span style="color:#c084fc">end</span>)  <span style="color:#64748b;font-style:italic"># keep evens</span>
+|> Enum.map(<span style="color:#c084fc">fn</span> x -> x * x <span style="color:#c084fc">end</span>)             <span style="color:#64748b;font-style:italic"># square them</span>
+|> Enum.sum()                               <span style="color:#64748b;font-style:italic"># add up</span>`}</CodeBlock>
 
-      <h3 style={styles.h3}>Simplicity — the FP design philosophy</h3>
+      <SubHeader>Simplicity — the FP design philosophy</SubHeader>
       <p style={styles.p}>There tends to be a simple syntactic design with functional programming. Program design is typically much smaller — a lot of thinking involved for not a lot of code. Elixir programs tend to be compact and expressive precisely because functions compose cleanly.</p>
     </div>
   );
@@ -616,7 +511,7 @@ const questions = [
 
 function QuizSection() {
   const [current, setCurrent] = useState(0);
-  const [score, setScore]     = useState(0);
+  const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(null);
   const [finished, setFinished] = useState(false);
 
@@ -641,37 +536,59 @@ function QuizSection() {
 
   if (finished) {
     const pct = Math.round((score / questions.length) * 100);
-    const msg = pct >= 80 ? "Excellent! You have mastered the material."
-              : pct >= 60 ? "Good progress! Review the sections you missed."
-              :              "Keep studying — revisit the tabs above.";
+    const msg = pct >= 80 ? "Excellent! You've mastered the material."
+      : pct >= 60 ? "Good progress! Review the sections you missed."
+        : "Keep studying — revisit the tabs above.";
+    const color = pct >= 80 ? "#34d399" : pct >= 60 ? "#fbbf24" : "#fb7185";
     return (
       <div>
-        <h2 style={styles.h2}>Test yourself</h2>
-        <div style={{ ...styles.card, textAlign: "center", padding: "2rem" }}>
-          <div style={{ fontSize: 40, fontWeight: 700, marginBottom: 8 }}>{score}/{questions.length}</div>
-          <div style={{ fontSize: 16, color: "#6b7280", marginBottom: 20 }}>{pct}% — {msg}</div>
-          <button style={styles.navBtn} onClick={restart}>Restart quiz</button>
+        <SectionHeader icon="🏆" title="Quiz results" />
+        <div style={{ ...styles.card, textAlign: "center", padding: "2.5rem" }}>
+          <div style={{ fontSize: 52, fontWeight: 800, marginBottom: 8, color, fontFamily: "'JetBrains Mono', monospace" }}>
+            {score}/{questions.length}
+          </div>
+          <div style={{ fontSize: 28, fontWeight: 700, color, marginBottom: 8 }}>{pct}%</div>
+          <div style={{ fontSize: 15, color: "#94a3b8", marginBottom: 28 }}>{msg}</div>
+          <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
+            {questions.map((_, i) => {
+              const wasCorrect = i < current || finished;
+              return (
+                <div key={i} style={{
+                  width: 28, height: 28, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700,
+                  background: "rgba(148,163,184,0.1)", color: "#94a3b8", border: "1px solid rgba(148,163,184,0.2)"
+                }}>{i + 1}</div>
+              );
+            })}
+          </div>
+          <button style={styles.primaryBtn} onClick={restart}>↺ Restart quiz</button>
         </div>
       </div>
     );
   }
 
+  const progress = ((current) / questions.length) * 100;
+
   return (
     <div>
-      <h2 style={styles.h2}>Test yourself</h2>
-      <div style={{ fontSize: 13, color: "#6b7280", marginBottom: 12 }}>
-        Question {current + 1} of {questions.length} &nbsp;|&nbsp; Score: {score}
+      <SectionHeader icon="🧠" title="Test yourself" />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#94a3b8", marginBottom: 8 }}>
+        <span>Question {current + 1} of {questions.length}</span>
+        <span style={{ color: "#a855f7", fontWeight: 600 }}>Score: {score}</span>
       </div>
-      <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 12, color: "#111827" }}>{q.q}</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 12 }}>
+      <div style={styles.progressBar}>
+        <div style={{ ...styles.progressFill, width: `${progress}%` }} />
+      </div>
+      <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 14, color: "#e2e8f0", lineHeight: 1.5, marginTop: 16 }}>{q.q}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
         {q.opts.map((opt, i) => {
           let extra = {};
           if (selected !== null) {
-            if (i === q.ans) extra = { background: "#f0fdf4", borderColor: "#16a34a", color: "#16a34a" };
-            else if (i === selected) extra = { background: "#fef2f2", borderColor: "#dc2626", color: "#dc2626" };
+            if (i === q.ans) extra = { background: "rgba(52,211,153,0.12)", borderColor: "#34d399", color: "#34d399" };
+            else if (i === selected) extra = { background: "rgba(251,113,133,0.12)", borderColor: "#fb7185", color: "#fb7185" };
           }
           return (
             <button key={i} style={{ ...styles.quizOpt, ...extra }} onClick={() => pick(i)}>
+              <span style={styles.optLetter}>{String.fromCharCode(65 + i)}</span>
               {opt}
             </button>
           );
@@ -682,9 +599,9 @@ function QuizSection() {
           {selected === q.ans ? "✓ Correct! " : "✗ Not quite. "}{q.exp}
         </div>
       )}
-      <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-        {current > 0 && <button style={styles.navBtn} onClick={prev}>← Previous</button>}
-        <button style={styles.navBtn} onClick={next}>
+      <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+        {current > 0 && <button style={styles.navBtn} onClick={prev}>← Prev</button>}
+        <button style={styles.primaryBtn} onClick={next}>
           {current < questions.length - 1 ? "Next →" : "See results"}
         </button>
       </div>
@@ -692,19 +609,33 @@ function QuizSection() {
   );
 }
 
+// ── Helper UI components ────────────────────────
+function SectionHeader({ icon, title }) {
+  return (
+    <div style={styles.sectionHeader}>
+      <span style={styles.sectionIcon}>{icon}</span>
+      <h2 style={styles.h2}>{title}</h2>
+    </div>
+  );
+}
+
+function SubHeader({ children }) {
+  return <h3 style={styles.h3}>{children}</h3>;
+}
+
 // ══════════════════════════════════════════════════
 //  MAIN COMPONENT
 // ══════════════════════════════════════════════════
 
 const TABS = [
-  { id: "overview",     label: "Overview",      Component: OverviewSection     },
-  { id: "fp-concepts",  label: "FP Concepts",   Component: FPConceptsSection   },
-  { id: "elixir-basics",label: "Elixir basics", Component: ElixirBasicsSection },
-  { id: "data-types",   label: "Data types",    Component: DataTypesSection    },
-  { id: "functions",    label: "Functions",     Component: FunctionsSection    },
-  { id: "recursion",    label: "Recursion",     Component: RecursionSection    },
-  { id: "enums-pipes",  label: "Enums & pipes", Component: EnumsPipesSection   },
-  { id: "quiz",         label: "Quiz",          Component: QuizSection         },
+  { id: "overview", label: "Overview", emoji: "⚗️", Component: OverviewSection },
+  { id: "fp-concepts", label: "FP Concepts", emoji: "🧮", Component: FPConceptsSection },
+  { id: "elixir-basics", label: "Elixir basics", emoji: "💜", Component: ElixirBasicsSection },
+  { id: "data-types", label: "Data types", emoji: "🔷", Component: DataTypesSection },
+  { id: "functions", label: "Functions", emoji: "λ", Component: FunctionsSection },
+  { id: "recursion", label: "Recursion", emoji: "🔄", Component: RecursionSection },
+  { id: "enums-pipes", label: "Enums & pipes", emoji: "🔗", Component: EnumsPipesSection },
+  { id: "quiz", label: "Quiz", emoji: "🧠", Component: QuizSection },
 ];
 
 export default function ElixirStudyGuide() {
@@ -713,7 +644,17 @@ export default function ElixirStudyGuide() {
 
   return (
     <div style={styles.root}>
-      <h1 style={styles.srOnly}>Elixir and Functional Programming — Complete Study Guide</h1>
+      {/* Header banner */}
+      <div style={styles.banner}>
+        <div style={styles.bannerInner}>
+          <div style={styles.bannerBadge}>Functional Programming · Lecture 4</div>
+          <h1 style={styles.bannerTitle}>
+            <span style={styles.bannerElixir}>Elixir</span> Study Guide
+          </h1>
+          <p style={styles.bannerSub}>BEAM VM · Pure Functions · Immutability · Tail Recursion</p>
+        </div>
+      </div>
+
       <div style={styles.guide}>
         {/* Tab bar */}
         <div style={styles.tabBar}>
@@ -723,96 +664,338 @@ export default function ElixirStudyGuide() {
               style={{ ...styles.tab, ...(activeTab === tab.id ? styles.tabActive : {}) }}
               onClick={() => setActiveTab(tab.id)}
             >
+              <span style={{ marginRight: 5, fontSize: 14 }}>{tab.emoji}</span>
               {tab.label}
             </button>
           ))}
         </div>
 
-        {/* Active section */}
-        <ActiveSection />
+        {/* Content */}
+        <div style={styles.content}>
+          <ActiveSection />
+        </div>
       </div>
     </div>
   );
 }
 
 // ══════════════════════════════════════════════════
-//  STYLES  (all inline — zero external CSS required)
+//  STYLES
 // ══════════════════════════════════════════════════
 const styles = {
-  srOnly: { position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)" },
   root: {
-    fontFamily: "'Segoe UI', system-ui, sans-serif",
-    color: "#111827",
-    background: "#ffffff",
+    fontFamily: "'Georgia', 'Times New Roman', serif",
+    color: "#e2e8f0",
+    background: "#0d1117",
     minHeight: "100vh",
-    padding: "1.5rem",
   },
-  guide: { maxWidth: 720, margin: "0 auto" },
+
+  // Banner
+  banner: {
+    background: "linear-gradient(135deg, #1a0533 0%, #0d1b2e 40%, #0a1628 100%)",
+    borderBottom: "1px solid rgba(168,85,247,0.3)",
+    padding: "2rem 1.5rem",
+    position: "relative",
+    overflow: "hidden",
+  },
+  bannerInner: { maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 1 },
+  bannerBadge: {
+    display: "inline-block",
+    background: "rgba(168,85,247,0.15)",
+    border: "1px solid rgba(168,85,247,0.4)",
+    color: "#c084fc",
+    fontSize: 11,
+    fontWeight: 600,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    padding: "4px 12px",
+    borderRadius: 20,
+    marginBottom: 12,
+    fontFamily: "'Courier New', monospace",
+  },
+  bannerTitle: {
+    fontSize: 32,
+    fontWeight: 800,
+    margin: "0 0 8px",
+    color: "#f1f5f9",
+    letterSpacing: "-0.02em",
+    fontFamily: "'Georgia', serif",
+  },
+  bannerElixir: {
+    background: "linear-gradient(90deg, #a855f7, #14b8a6)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  },
+  bannerSub: {
+    fontSize: 13,
+    color: "#64748b",
+    margin: 0,
+    fontFamily: "'Courier New', monospace",
+    letterSpacing: "0.05em",
+  },
+
+  guide: { maxWidth: 720, margin: "0 auto", padding: "1.5rem" },
 
   // Tabs
-  tabBar: { display: "flex", gap: 6, flexWrap: "wrap", marginBottom: "1.5rem", borderBottom: "1px solid #e5e7eb", paddingBottom: "0.75rem" },
-  tab: { background: "transparent", border: "1px solid #d1d5db", borderRadius: 6, padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#6b7280", fontFamily: "inherit", transition: "all 0.15s" },
-  tabActive: { background: "#eff6ff", color: "#2563eb", borderColor: "#93c5fd", fontWeight: 600 },
+  tabBar: {
+    display: "flex",
+    gap: 6,
+    flexWrap: "wrap",
+    marginBottom: "1.5rem",
+    borderBottom: "1px solid rgba(148,163,184,0.1)",
+    paddingBottom: "1rem",
+  },
+  tab: {
+    background: "rgba(148,163,184,0.06)",
+    border: "1px solid rgba(148,163,184,0.12)",
+    borderRadius: 8,
+    padding: "6px 12px",
+    fontSize: 12.5,
+    cursor: "pointer",
+    color: "#94a3b8",
+    fontFamily: "'Georgia', serif",
+    transition: "all 0.15s",
+    display: "flex",
+    alignItems: "center",
+  },
+  tabActive: {
+    background: "rgba(168,85,247,0.15)",
+    color: "#c084fc",
+    borderColor: "rgba(168,85,247,0.4)",
+    fontWeight: 600,
+    boxShadow: "0 0 12px rgba(168,85,247,0.2)",
+  },
+
+  content: {
+    background: "rgba(255,255,255,0.02)",
+    border: "1px solid rgba(148,163,184,0.08)",
+    borderRadius: 12,
+    padding: "1.75rem",
+    overflow: "hidden",
+    minWidth: 0,
+    boxSizing: "border-box",
+  },
+
+  // Section header
+  sectionHeader: { display: "flex", alignItems: "center", gap: 10, marginBottom: "1rem" },
+  sectionIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+    background: "rgba(168,85,247,0.15)",
+    border: "1px solid rgba(168,85,247,0.3)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 16,
+    flexShrink: 0,
+  },
 
   // Typography
-  h2: { fontSize: 20, fontWeight: 700, marginBottom: "1rem", color: "#111827" },
-  h3: { fontSize: 15, fontWeight: 600, margin: "1.25rem 0 0.5rem", color: "#111827" },
-  p:  { fontSize: 14, lineHeight: 1.7, color: "#374151", marginBottom: "0.75rem" },
+  h2: { fontSize: 20, fontWeight: 700, margin: 0, color: "#f1f5f9", fontFamily: "'Georgia', serif" },
+  h3: {
+    fontSize: 14,
+    fontWeight: 600,
+    margin: "1.4rem 0 0.6rem",
+    color: "#a855f7",
+    textTransform: "uppercase",
+    letterSpacing: "0.07em",
+    fontFamily: "'Courier New', monospace",
+  },
+  p: { fontSize: 14, lineHeight: 1.75, color: "#94a3b8", marginBottom: "0.75rem", fontFamily: "'Georgia', serif" },
+
+  inlineCode: {
+    background: "rgba(168,85,247,0.12)",
+    border: "1px solid rgba(168,85,247,0.2)",
+    color: "#c084fc",
+    padding: "1px 6px",
+    borderRadius: 4,
+    fontSize: "0.9em",
+    fontFamily: "'Courier New', monospace",
+  },
 
   // Cards
-  card: { background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 10, padding: "1rem 1.25rem", marginBottom: "0.75rem" },
-  cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: "1rem" },
-  conceptCard:  { background: "#f3f4f6", borderRadius: 8, padding: "0.75rem 1rem" },
-  conceptLabel: { fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#6b7280", marginBottom: 4 },
-  conceptVal:   { fontSize: 14, fontWeight: 600, color: "#111827" },
-  conceptSub:   { fontSize: 12, color: "#6b7280", marginTop: 2 },
+  card: {
+    background: "rgba(148,163,184,0.05)",
+    border: "1px solid rgba(148,163,184,0.1)",
+    borderRadius: 10,
+    padding: "1rem 1.25rem",
+    marginBottom: "1rem",
+  },
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(155px, 1fr))",
+    gap: 12,
+    marginBottom: "1.25rem",
+  },
+  conceptCard: {
+    background: "rgba(15,23,42,0.6)",
+    borderRadius: 10,
+    padding: "0.85rem 1rem",
+    border: "1px solid rgba(148,163,184,0.08)",
+  },
+  conceptLabel: { fontSize: 10.5, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 5, fontFamily: "'Courier New', monospace" },
+  conceptVal: { fontSize: 14, fontWeight: 700, color: "#e2e8f0" },
+  conceptSub: { fontSize: 12, color: "#64748b", marginTop: 3 },
 
   // Code
+  preWrapper: {
+    background: "#0a0e1a",
+    border: "1px solid rgba(148,163,184,0.12)",
+    borderRadius: 10,
+    overflow: "hidden",
+    margin: "0.75rem 0 1.1rem",
+  },
+  preDots: {
+    display: "flex",
+    gap: 6,
+    padding: "8px 12px",
+    background: "rgba(255,255,255,0.03)",
+    borderBottom: "1px solid rgba(148,163,184,0.08)",
+  },
+  dot: { width: 10, height: 10, borderRadius: "50%", display: "inline-block" },
+  preScroll: {
+    overflowX: "auto",
+    width: "100%",
+    boxSizing: "border-box",
+  },
   pre: {
-    background: "#1e1e2e",
-    border: "1px solid #374151",
-    borderRadius: 8,
-    padding: "0.75rem 1rem",
+    background: "transparent",
+    padding: "0.9rem 1rem",
     fontFamily: "'Courier New', Courier, monospace",
     fontSize: 12.5,
-    lineHeight: 1.6,
-    overflowX: "auto",
-    margin: "0.5rem 0 1rem",
-    color: "#e2e8f0",
+    lineHeight: 1.7,
+    margin: 0,
+    color: "#cbd5e1",
+    whiteSpace: "pre",
+    display: "inline-block",
+    minWidth: "100%",
+    boxSizing: "border-box",
   },
 
   // Highlight callout
   highlight: {
-    background: "#fffbeb",
-    borderLeft: "3px solid #f59e0b",
-    padding: "0.5rem 0.75rem",
-    borderRadius: "0 6px 6px 0",
-    fontSize: 13,
-    lineHeight: 1.6,
-    color: "#111827",
-    margin: "0.5rem 0 1rem",
+    background: "rgba(168,85,247,0.08)",
+    borderLeft: "3px solid #a855f7",
+    padding: "0.65rem 0.9rem",
+    borderRadius: "0 8px 8px 0",
+    fontSize: 13.5,
+    lineHeight: 1.65,
+    color: "#c4b5fd",
+    margin: "0.5rem 0 1.1rem",
+    fontFamily: "'Georgia', serif",
   },
 
   // Compare grid
-  compareGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: "1rem" },
-  compareCard:  { borderRadius: 8, padding: "0.75rem 1rem", fontSize: 13, lineHeight: 1.6 },
-  compareBad:   { background: "#fef2f2", border: "1px solid #fecaca" },
-  compareGood:  { background: "#f0fdf4", border: "1px solid #bbf7d0" },
-  compareTitle: { fontWeight: 600, fontSize: 12, marginBottom: 6 },
+  compareGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: "1.1rem" },
+  compareCard: { borderRadius: 10, padding: "0.85rem 1rem", fontSize: 13, lineHeight: 1.6 },
+  compareBad: { background: "rgba(251,113,133,0.06)", border: "1px solid rgba(251,113,133,0.2)" },
+  compareGood: { background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.2)" },
+  compareTitle: { fontWeight: 700, fontSize: 12, marginBottom: 8, letterSpacing: "0.04em", textTransform: "uppercase", fontFamily: "'Courier New', monospace" },
 
   // Badge
-  badge: { display: "inline-block", fontSize: 11, fontWeight: 600, padding: "3px 8px", borderRadius: 6, marginRight: 4, marginBottom: 4 },
+  badge: {
+    display: "inline-block",
+    fontSize: 11.5,
+    fontWeight: 600,
+    padding: "4px 10px",
+    borderRadius: 20,
+    marginRight: 6,
+    marginBottom: 6,
+    fontFamily: "'Courier New', monospace",
+  },
 
   // Tree icon
-  treeIcon: { width: 32, height: 32, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600, flexShrink: 0 },
+  treeIcon: { width: 34, height: 34, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, flexShrink: 0, fontFamily: "'Courier New', monospace" },
 
-  // Divider
-  divider: { border: "none", borderTop: "1px solid #e5e7eb", margin: "1.25rem 0" },
+  // Step numbers
+  stepNum: {
+    width: 22,
+    height: 22,
+    borderRadius: "50%",
+    background: "rgba(168,85,247,0.2)",
+    border: "1px solid rgba(168,85,247,0.4)",
+    color: "#c084fc",
+    fontSize: 11,
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginTop: 2,
+    fontFamily: "'Courier New', monospace",
+  },
+
+  // Progress bar
+  progressBar: {
+    height: 4,
+    background: "rgba(148,163,184,0.12)",
+    borderRadius: 2,
+    marginBottom: 4,
+    overflow: "hidden",
+  },
+  progressFill: {
+    height: "100%",
+    background: "linear-gradient(90deg, #a855f7, #14b8a6)",
+    borderRadius: 2,
+    transition: "width 0.3s ease",
+  },
 
   // Quiz
-  quizOpt: { background: "transparent", border: "1px solid #d1d5db", borderRadius: 8, padding: "8px 12px", fontSize: 13, cursor: "pointer", textAlign: "left", color: "#111827", fontFamily: "inherit", transition: "all 0.15s" },
-  quizFeedback: { fontSize: 13, padding: "8px 12px", borderRadius: 8, marginBottom: "0.75rem", lineHeight: 1.5 },
-  feedbackOk:   { background: "#f0fdf4", color: "#15803d" },
-  feedbackFail: { background: "#fef2f2", color: "#dc2626" },
-  navBtn: { background: "transparent", border: "1px solid #d1d5db", borderRadius: 8, padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#111827", fontFamily: "inherit" },
+  quizOpt: {
+    background: "rgba(148,163,184,0.06)",
+    border: "1px solid rgba(148,163,184,0.15)",
+    borderRadius: 8,
+    padding: "10px 14px",
+    fontSize: 13,
+    cursor: "pointer",
+    textAlign: "left",
+    color: "#cbd5e1",
+    fontFamily: "'Georgia', serif",
+    transition: "all 0.15s",
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+  },
+  optLetter: {
+    width: 22,
+    height: 22,
+    borderRadius: 5,
+    background: "rgba(168,85,247,0.15)",
+    color: "#c084fc",
+    fontSize: 11,
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    fontFamily: "'Courier New', monospace",
+  },
+  quizFeedback: { fontSize: 13, padding: "10px 14px", borderRadius: 8, marginBottom: "0.75rem", lineHeight: 1.6, fontFamily: "'Georgia', serif" },
+  feedbackOk: { background: "rgba(52,211,153,0.1)", color: "#34d399", border: "1px solid rgba(52,211,153,0.25)" },
+  feedbackFail: { background: "rgba(251,113,133,0.1)", color: "#fb7185", border: "1px solid rgba(251,113,133,0.25)" },
+
+  // Buttons
+  navBtn: {
+    background: "rgba(148,163,184,0.08)",
+    border: "1px solid rgba(148,163,184,0.2)",
+    borderRadius: 8,
+    padding: "8px 16px",
+    fontSize: 13,
+    cursor: "pointer",
+    color: "#94a3b8",
+    fontFamily: "'Georgia', serif",
+  },
+  primaryBtn: {
+    background: "linear-gradient(135deg, #7c3aed, #0d9488)",
+    border: "none",
+    borderRadius: 8,
+    padding: "9px 20px",
+    fontSize: 13,
+    cursor: "pointer",
+    color: "#fff",
+    fontWeight: 600,
+    fontFamily: "'Georgia', serif",
+    marginTop: 4,
+  },
 };
