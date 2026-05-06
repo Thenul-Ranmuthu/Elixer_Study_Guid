@@ -678,7 +678,7 @@ export default function ElixirStudyGuide() {
 
       {/* Footer */}
       <div style={styles.footer}>
-        <p style={styles.footerText}>By Thenul Ranmuthu</p>
+        <p style={styles.footerText}>© Thenul Ranmuthu</p>
       </div>
     </div>
   );
