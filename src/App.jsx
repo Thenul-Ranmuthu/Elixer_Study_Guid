@@ -675,6 +675,11 @@ export default function ElixirStudyGuide() {
           <ActiveSection />
         </div>
       </div>
+
+      {/* Footer */}
+      <div style={styles.footer}>
+        <p style={styles.footerText}>By Thenul Ranmuthu</p>
+      </div>
     </div>
   );
 }
@@ -1006,5 +1011,21 @@ const styles = {
     fontWeight: 600,
     fontFamily: "'Georgia', serif",
     marginTop: 4,
+  },
+
+  // Footer
+  footer: {
+    maxWidth: 720,
+    margin: "0 auto",
+    padding: "2rem 1.5rem 1.5rem",
+    textAlign: "center",
+    borderTop: "1px solid rgba(148,163,184,0.08)",
+  },
+  footerText: {
+    fontSize: 12,
+    color: "#64748b",
+    margin: 0,
+    fontFamily: "'Courier New', monospace",
+    letterSpacing: "0.03em",
   },
 };
